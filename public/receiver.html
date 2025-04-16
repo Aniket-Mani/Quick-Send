@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quick Send - Receiver</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="receiver.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#317efb" />
+</head>
+
+<body class="dark-mode">
+    <header class="header" aria-label="Main Header">
+        <div class="container header-container">
+
+            <div class="logo" id="logo">
+                <a href="index.html" aria-current="page">
+                    <i class="fas fa-rocket logo-icon" aria-hidden="true"></i>
+                    <span class="logo-text">Quick Send</span>
+                </a>
+            </div>
+
+            <nav class="main-nav" aria-label="Primary Navigation">
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+
+                <button id="theme-toggle" class="theme-toggle-btn">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <span class="visually-hidden"></span>
+                </button>
+
+                <div class="connection-status" title="Connection status">
+                    <i class="fas fa-circle status-icon connected" aria-hidden="true"></i>
+                    <span class="visually-hidden">Connected to server</span>
+                </div>
+
+                <button class="menu-toggle" aria-expanded="false" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+
+    <main class="main-section">
+        <section class="hero-section join-screen" aria-labelledby="receiver-hero-heading">
+            <div class="hero-container">
+                <h1 id="receiver-hero-heading">Receive Files with Quick Send</h1>
+                <p>Enter the Room ID provided by the sender to join the session.</p>
+
+                <div class="form-input">
+                    <input type="text" id="join-id" placeholder="Enter Room ID" />
+                </div>
+                <div class="form-input">
+                    <button id="receiver-start-con-btn" class="btn primary-btn">Connect</button>
+                </div>
+
+                <p style="margin-top: 1rem;">or</p>
+
+                <div class="form-input">
+                    <button id="scan-qr-btn" class="btn secondary-btn">Scan QR Code</button>
+                </div>
+                <div id="qr-scanner-container" style="width: 300px; margin: 1rem auto; display: none;"></div>
+            </div>
+        </section>
+        <section class="fs-screen" id="file-transfer-screen" style="display: none;">
+            <div class="file-receive card">
+                <header class="card-header">
+                    <h3>Incoming Files</h3>
+                </header>
+                <div class="card-body">
+                    <div class="files-list-section">
+                        <h4 class="section-title">Shared Files</h4>
+                        <div class="files-list">
+                            <div class="files-header">
+                                <span class="file-title">File Name</span>
+                                <span class="file-size-title">Size</span>
+                                <span class="file-status-title">Status / Progress</span>
+                            </div>
+                            <div id="received-files" class="files-items">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <button class="btn danger-btn" id="cancel-download">Cancel Active Transfer</button>
+                </footer>
+            </div>
+        </section>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./JS /receiver.js"></script>
+    <script src="./JS /style.js"></script>
+    <script src="./JS /loadPage.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quick Send</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#317efb" />
+</head>
+
+<body class="dark-mode">
+
+    <header class="header" aria-label="Main Header">
+        <div class="container header-container">
+
+            <div class="logo" id="logo">
+                <a href="index.html" aria-current="page">
+                    <i class="fas fa-rocket logo-icon" aria-hidden="true"></i>
+                    <span class="logo-text">Quick Send</span>
+                </a>
+            </div>
+
+            <nav class="main-nav" aria-label="Primary Navigation">
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+
+                <button id="theme-toggle" class="theme-toggle-btn">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <span class="visually-hidden"></span>
+                </button>
+
+                <div class="connection-status" title="Connection status">
+                    <i class="fas fa-circle status-icon connected" aria-hidden="true"></i>
+                    <span class="visually-hidden">Connected to server</span>
+                </div>
+
+                <button class="menu-toggle" aria-expanded="false" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-section" id="home">
+
+        <section class="hero-section" aria-labelledby="hero-heading">
+            <div class="container hero-container">
+
+                <div class="hero-buttons" id="initial-options">
+                    <button class="btn primary-btn" id="send-btn">Send Files</button>
+                    <button class="btn secondary-btn" id="receive-btn">Receive Files</button>
+                </div>
+
+                <div class="hero-dynamic-content" id="dynamic-content">
+                </div>
+
+                <div id="dynamic-content2" class="hero-dynamic-content hidden">
+                    <section class="fs-screen" id="file-transfer-screen">
+                        <div class="file-send card">
+                            <header class="card-header">
+                                <h3>Send File</h3>
+                                <p>Room: <span id="room-code-display"></span> | Receiver: <span
+                                        id="receiver-id-display"></span>
+                                </p>
+                            </header>
+                            <div class="card-body">
+                                <div class="file-select">
+                                    <label for="fileInput" class="btn secondary-btn">Choose File</label>
+                                    <input type="file" id="fileInput" style="display: none;" />
+                                    <span id="chosen-file-name">No file chosen</span>
+                                    <button id="sendFileBtn" class="btn primary-btn" disabled>Send File</button>
+                                </div>
+                                <div class="files-list">
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <p class="status-text">Select a file to send.</p>
+                                <button class="btn secondary-btn" id="disconnect-peer-btn">Disconnect</button>
+                            </footer>
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="about-section" id="about" aria-labelledby="about-heading">
+            <button class="collapse-toggle" onclick="toggleAbout()">About Quick Send</button>
+            <div class="container about-container" id="aboutContent" data-aos="fade-up">
+                <div class="about-text" data-aos="fade-right">
+                    <h2 id="about-heading">About Quick Send: Share Files Without the Hassle.</h2>
+                    <p>
+                        Imagine sending a file to someone right next to you – instantly, securely, without jumping
+                        through hoops. That's the power of <strong>Quick Send</strong>. We built this platform to
+                        eliminate the common frustrations of file sharing. No more "file too large" errors, no more
+                        searching for cables, no more mandatory sign-ups just to send a single document.
+                    </p>
+                    <p>
+                        Quick Send connects your devices directly using just your web browser. It's incredibly
+                        <strong>user-friendly</strong>: simply choose to send or receive, share a unique code or QR
+                        code, and transfer your files in real-time. This direct connection not only makes transfers
+                        <strong>lightning-fast</strong> but also inherently more <strong>private and secure</strong>, as
+                        your data takes the most direct path possible.
+                    </p>
+                    <p>
+                        Whether you're collaborating with a colleague, sharing photos with a friend, or quickly moving
+                        documents between your own devices, Quick Send offers a seamless, reliable, and refreshingly
+                        simple solution. Give it a try and discover how easy file sharing can be!
+                    </p>
+                </div>
+                <div class="about-visual" data-aos="fade-left">
+                    <img src="images/about-illustration.svg"
+                        alt="Illustration showing people easily sharing files between devices using Quick Send"
+                        class="about-image" />
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section" id="features" aria-labelledby="features-heading">
+            <div class="container features-container">
+                <h2 id="features-heading" class="section-heading" data-aos="fade-up">Key Features</h2>
+                <div class="features-grid" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">Instant Real-time Transfers</h3>
+                        <p class="feature-description">
+                            Send files directly between devices in real-time. No cloud uploads or waiting involved.
+                        </p>
+                    </div>
+
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon">
+                            <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">No Sign-up Needed</h3>
+                        <p class="feature-description">
+                            Completely browser-based. No accounts, installations, or sign-ups required to start sharing.
+                        </p>
+                    </div>
+
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                        <div class="feature-icon">
+                            <i class="fas fa-qrcode" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">Simple Connection</h3>
+                        <p class="feature-description">
+                            Easily connect devices using simple Room Codes or convenient QR code scanning.
+                        </p>
+                    </div>
+
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">Secure & Private</h3>
+                        <p class="feature-description">
+                            Direct peer-to-peer connections mean your files go straight to the recipient, enhancing
+                            privacy.
+                        </p>
+                    </div>
+
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon">
+                            <i class="fas fa-desktop" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">Cross-Platform</h3>
+                        <p class="feature-description">
+                            Works seamlessly on any device with a modern web browser – desktops, laptops, tablets, and
+                            phones.
+                        </p>
+                    </div>
+
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                        <div class="feature-icon">
+                            <i class="fas fa-magic" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">User-Friendly Interface</h3>
+                        <p class="feature-description">
+                            Designed with simplicity in mind for an intuitive and hassle-free file sharing experience.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+            <div class="container faq-container">
+                <h2 id="faq-heading" class="section-heading" data-aos="fade-up">Frequently Asked Questions</h2>
+
+                <div class="faq-list" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+                            <span>Is Quick Send secure?</span>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-1">
+                            <p>
+                                Yes. Quick Send establishes a direct peer-to-peer connection between devices whenever
+                                possible using WebRTC technology. Files are transferred directly and are typically not
+                                stored on any intermediary server, enhancing privacy and security. Connections are also
+                                encrypted by default through WebRTC protocols.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+                            <span>Do I need to create an account or install software?</span>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-2">
+                            <p>
+                                No. Quick Send works entirely within your web browser. There's no need to sign up, log
+                                in, or install any application or browser extension, making it quick and hassle-free to
+                                start sharing files immediately.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+                            <span>What file types and sizes can I send?</span>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-3">
+                            <p>
+                                Quick Send generally supports transferring any file type. While there's no strict
+                                built-in file size limit imposed by Quick Send itself, extremely large files (many
+                                gigabytes) might be limited by browser capabilities, device memory, or network stability
+                                between the connected peers. For typical documents, images, and videos, it works
+                                seamlessly.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+                            <span>How does the connection work?</span>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-4">
+                            <p>
+                                Devices connect using unique Room Codes or QR codes. Behind the scenes, it uses
+                                technologies like WebSockets for signaling (coordinating the connection) and WebRTC for
+                                establishing the direct peer-to-peer data channel when possible. This allows for
+                                efficient and private file transfers directly between browsers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
+                            <span>Is Quick Send free to use?</span>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-5">
+                            <p>
+                                Yes, Quick Send is currently offered as a free service for simple and direct file
+                                sharing needs.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section class="contact-section" id="contact" aria-labelledby="contact-heading">
+            <div class="container contact-container">
+                <h2 id="contact-heading" class="section-heading" data-aos="fade-up">Get In Touch</h2>
+                <p class="contact-intro" data-aos="fade-up" data-aos-delay="100">
+                    Have questions or feedback? Send us a message below.
+                </p>
+
+                <form class="contact-form" action="#" method="POST" data-aos="fade-up" data-aos-delay="200">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group form-submit">
+                        <button type="submit" class="btn">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container footer-container">
+            <p>&copy; <span id="current-year"></span> Quick Send. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./JS /style.js"></script>
+    <script src="./JS /loadPage.js"></script>
+    <script type="module" src="./JS /main.js"></script>
+
+</body>
+
+</html>

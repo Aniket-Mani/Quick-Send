@@ -1,0 +1,1425 @@
+/* ================================
+    Root Variables & Global Styles (Old Money Theme)
+================================ */
+:root {
+  /* Base Colors - Neutral & Classic */
+  --bg-light: #fdfbf7;       /* Creamy/Off-White */
+  --text-light: #2c3e50;     /* Muted Dark Blue/Gray */
+  --bg-dark: #1d2935;         /* Deep Charcoal/Navy */
+  --text-dark: #d0d5dd;       /* Soft Gray for Dark Mode */
+
+  /* Accent Colors - Muted & Sophisticated */
+  --accent-primary: #a07d5a;  /* Muted Gold/Bronze */
+  --accent-secondary: #4a6d7c; /* Muted Teal/Blue-Gray */
+  --accent-tertiary: #5d707f;  /* Slate Gray */
+  --accent-hover: #b89a7a;   /* Slightly lighter gold for hover */
+  --accent-error: #a94442;    /* Muted Red for errors/disconnect */
+  --accent-error-hover: #8a2d2a;
+
+  /* Backgrounds & Borders */
+  --bg-container-light: #ffffff; /* Clean White */
+  --bg-container-dark: #273746;  /* Darker container background */
+  --border-color-light: #e0e5eb; /* Soft Gray Border */
+  --border-color-dark: #3e4f60;  /* Muted Dark Border */
+
+  /* Shadows - Subtle & Soft */
+  --shadow-color-light: rgba(44, 62, 80, 0.1);  /* Muted shadow color */
+  --shadow-color-dark: rgba(0, 0, 0, 0.2);     /* Subtle dark shadow */
+  --shadow-xs: 0 1px 2px var(--shadow-color-light);
+  --shadow-sm: 0 2px 4px var(--shadow-color-light);
+  --shadow-md: 0 4px 8px var(--shadow-color-light);
+  --shadow-lg: 0 8px 16px var(--shadow-color-light);
+  --shadow-inset: inset 0 1px 3px rgba(0,0,0,0.06);
+
+  /* Transitions - Smooth & Understated */
+  --transition-fast: all 0.2s ease-out;
+  --transition-std: all 0.3s ease-out;
+  --transition-slow: all 0.4s ease-out;
+
+  /* Font - Clean Sans-Serif (Could use a classic Serif for headings) */
+  --font-primary: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Suggestion for Headings: --font-heading: 'Lora', 'Georgia', serif; */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: background-color var(--transition-std), color var(--transition-std);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  position: relative;
+}
+/* Subtle background pattern (optional) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  /* Example: Very faint crosshatch or linen-like pattern */
+  /* background-image: linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.01) 75%, rgba(0,0,0,0.01)), linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.01) 75%, rgba(0,0,0,0.01)); */
+  /* background-size: 10px 10px; */
+  /* background-position: 0 0, 5px 5px; */
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+
+body.dark-mode {
+  --bg-light: var(--bg-dark);
+  --text-light: var(--text-dark);
+  --bg-container-light: var(--bg-container-dark);
+  --border-color-light: var(--border-color-dark);
+  --shadow-color-light: var(--shadow-color-dark);
+}
+
+/* Focus visible styling */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  /* Remove aggressive box-shadow */
+  border-radius: 4px;
+}
+
+
+/* ================================
+  Header Styles (Subtle)
+================================ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 1.25rem 0; /* Consistent padding */
+  background: var(--bg-container-light); /* Solid background */
+  /* Remove backdrop-filter */
+  border-bottom: 1px solid var(--border-color-light); /* Clear border */
+  box-shadow: none; /* Remove initial shadow */
+  transition: background var(--transition-std), border-color var(--transition-std), box-shadow var(--transition-std), padding var(--transition-std);
+  will-change: background, border-color, box-shadow, padding;
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px; /* Consistent height */
+  transition: min-height var(--transition-std);
+}
+
+/* Scrolled State - Subtle Shadow */
+.header.scrolled {
+  padding: 1rem 0; /* Slightly reduced padding */
+  box-shadow: var(--shadow-sm); /* Add subtle shadow on scroll */
+  /* background might slightly change if needed, e.g., increase opacity if semi-transparent */
+}
+.header.scrolled .header-container {
+  min-height: 55px;
+}
+
+body.dark-mode .header {
+   border-bottom: 1px solid var(--border-color-dark);
+   box-shadow: none;
+}
+body.dark-mode .header.scrolled {
+  box-shadow: var(--shadow-md); /* Slightly more noticeable shadow in dark mode */
+}
+
+
+/* ================================
+  Logo (Refined)
+================================ */
+.logo {
+  position: relative;
+}
+
+.logo a {
+  font-size: clamp(1.4rem, 4vw, 1.6rem); /* Slightly smaller */
+  font-weight: 600; /* Less bold */
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: -0.5px; /* Less aggressive */
+  color: var(--text-light); /* Use main text color */
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+  transform-origin: left center;
+}
+
+.logo a:hover {
+  opacity: 0.8; /* Subtle hover */
+  /* Remove transform: scale */
+}
+
+.logo-icon {
+  color: var(--accent-secondary); /* Muted teal/blue */
+  font-size: 1.1em;
+  transition: transform var(--transition-std), color var(--transition-std);
+  filter: none; /* Remove glow */
+}
+.logo a:hover .logo-icon {
+  color: var(--accent-primary); /* Muted gold on hover */
+  transform: none; /* No rotation */
+}
+
+.logo-text {
+  color: inherit; /* Inherit from link */
+  text-shadow: none; /* Remove shadow */
+  transition: color var(--transition-std);
+}
+.logo a:hover .logo-text {
+  color: var(--accent-primary); /* Match icon hover */
+  /* Remove text-shadow glow */
+}
+
+/* Logo Spark CSS (Muted Gold) */
+.logo-spark {
+position: absolute;
+width: 5px; height: 5px; /* Smaller */
+background: var(--accent-primary); /* Muted gold */
+border-radius: 50%;
+pointer-events: none;
+opacity: 0.8; /* Less intense */
+transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.7s ease-out; /* Smoother ease */
+z-index: 10;
+transform: scale(1);
+mix-blend-mode: normal; /* Remove screen blend */
+}
+.logo a {
+  position: relative;
+  display: inline-flex;
+  overflow: visible; /* Allow sparks outside if desired */
+}
+
+
+/* ================================
+  Navigation (Classic)
+================================ */
+.nav-links {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 2rem); /* Slightly reduced max gap */
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  color: var(--text-light);
+  font-size: clamp(0.9rem, 2vw, 0.95rem); /* Slightly smaller */
+  font-weight: 500; /* Standard weight */
+  text-decoration: none;
+  position: relative;
+  padding: 0.5rem 0.1rem; /* Adjust padding */
+  transition: color var(--transition-fast);
+  letter-spacing: 0.3px; /* Normal spacing */
+  /* Remove transform */
+}
+
+/* Underline Animation - Subtle */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 1px; /* Closer to text */
+  height: 1px; /* Thin line */
+  width: 0%;
+  background: var(--accent-primary); /* Muted gold underline */
+  transition: width var(--transition-std); /* Simple width transition */
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent-primary); /* Muted gold */
+  /* Remove transform and text-shadow */
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* Dark Mode Nav Link */
+body.dark-mode .nav-links a {
+  color: var(--text-dark);
+}
+body.dark-mode .nav-links a:hover,
+body.dark-mode .nav-links a.active {
+  color: var(--accent-hover); /* Lighter gold */
+}
+body.dark-mode .nav-links a::after {
+  background: var(--accent-hover);
+}
+
+
+/* ================================
+  Header Actions (Understated)
+================================ */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Standard gap */
+}
+
+.theme-toggle-btn,
+.menu-toggle {
+  background: transparent;
+  border: 1px solid var(--border-color-light); /* Use border color */
+  cursor: pointer;
+  color: var(--text-light); /* Use main text color */
+  font-size: 1.1rem; /* Slightly smaller */
+  padding: 0.5rem;
+  border-radius: 8px; /* Standard radius */
+  display: grid;
+  place-items: center;
+  transition: var(--transition-fast);
+  box-shadow: none; /* Remove inset shadow */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Remove ::before glow effect */
+.theme-toggle-btn::before,
+.menu-toggle::before {
+  display: none;
+}
+
+.theme-toggle-btn:hover,
+.menu-toggle:hover {
+  color: var(--accent-primary);
+  border-color: var(--border-color-light); /* Keep border subtle */
+  background: color-mix(in srgb, var(--accent-primary), transparent 95%); /* Very subtle background */
+  box-shadow: var(--shadow-xs); /* Add tiny shadow on hover */
+  transform: none; /* No scale/translate */
+}
+
+.theme-toggle-btn i,
+.menu-toggle i {
+  transition: transform var(--transition-fast); /* Faster, simpler transition */
+}
+.theme-toggle-btn:hover i,
+.menu-toggle:hover i {
+  transform: scale(1.05); /* Simple scale */
+  /* No rotation */
+}
+/* Remove complex dark mode icon rotation */
+
+
+/* Connection Status - Simple */
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  opacity: 0;
+  transform: none; /* No translate */
+  transition: opacity var(--transition-std);
+  pointer-events: none;
+}
+.connection-status.show {
+  opacity: 0.7; /* Less prominent */
+  transform: none;
+  pointer-events: auto;
+}
+.status-icon.connected {
+  color: var(--accent-secondary); /* Muted teal/blue status */
+  font-size: 0.75rem;
+  animation: pulse-simple 2s infinite ease-in-out;
+  filter: none; /* Remove glow */
+}
+/* Simpler Pulse */
+@keyframes pulse-simple {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.1); }
+}
+
+
+/* ================================
+  Mobile Nav Styles (Clean)
+================================ */
+.menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+      display: grid;
+  }
+
+  .nav-links {
+      flex-direction: column;
+      position: absolute;
+      top: calc(100% + 8px); /* Closer */
+      right: 1rem;
+      width: min(calc(100vw - 2rem), 250px); /* Slightly narrower */
+      background: var(--bg-container-light); /* Solid background */
+      /* Remove backdrop-filter */
+      padding: 1rem;
+      border-radius: 0.75rem; /* Standard radius */
+      box-shadow: var(--shadow-md); /* Standard shadow */
+      border: 1px solid var(--border-color-light);
+      transform-origin: top right;
+      transform: scale(1) translateY(-5px); /* Simpler initial state */
+      opacity: 0;
+      visibility: hidden;
+      transition: transform var(--transition-std), opacity var(--transition-std), visibility var(--transition-std);
+      gap: 0.25rem; /* Tighter gap */
+  }
+
+  .nav-links.show {
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+  }
+
+  .nav-links a {
+      padding: 0.7rem 0.5rem;
+      font-size: 1rem; /* Standard mobile size */
+      border-bottom: 1px solid var(--border-color-light);
+  }
+   .nav-links a::after {
+      bottom: 6px; /* Adjust */
+      height: 1px;
+  }
+  body.dark-mode .nav-links {
+      border-color: var(--border-color-dark);
+  }
+  body.dark-mode .nav-links a {
+       border-bottom-color: var(--border-color-dark);
+  }
+}
+
+
+/* ================================
+  Hero Section (Clean & Calm)
+================================ */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 85vh; /* Slightly less than full height */
+  padding: clamp(3rem, 8vh, 6rem) 1rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-light); /* Clean background */
+  /* Removed complex gradient */
+}
+/* Remove dark mode gradient */
+body.dark-mode .hero-section {
+ background: var(--bg-dark);
+}
+
+/* Remove animated shapes */
+.hero-section::before, .hero-section::after {
+  display: none;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.8rem, 4vw, 2.5rem); /* Standard gap */
+  align-items: center;
+  width: 100%;
+  max-width: 650px; /* Standard width */
+  margin: 0 auto;
+  padding: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* Standard gap */
+  flex-wrap: wrap;
+}
+
+/* ================================
+  Buttons (Classic)
+================================ */
+.btn {
+  padding: clamp(0.7rem, 2vw, 0.8rem) clamp(1.5rem, 4vw, 2rem);
+  border: 1px solid transparent; /* Base border */
+  border-radius: 6px; /* Subtle rounding */
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 600; /* Standard bold */
+  cursor: pointer;
+  transition: var(--transition-fast);
+  background: var(--accent-secondary); /* Muted teal/blue */
+  color: var(--bg-light); /* Light text */
+  text-shadow: none;
+  letter-spacing: 0.4px;
+  box-shadow: var(--shadow-xs); /* Very subtle shadow */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  will-change: transform, box-shadow, background-color, border-color;
+}
+
+/* Remove shine effect */
+.btn::before {
+  display: none;
+}
+
+.btn:hover {
+  transform: translateY(-11px); /* Minimal lift */
+  box-shadow: var(--shadow-sm); /* Slightly increased shadow */
+  background: color-mix(in srgb, var(--accent-secondary), var(--text-light) 10%); /* Darken slightly */
+  border-color: transparent;
+}
+
+.btn:active {
+ transform: translateY(0px); /* No lift on active */
+ box-shadow: var(--shadow-xs);
+ background: color-mix(in srgb, var(--accent-secondary), var(--text-light) 15%); /* Darker press */
+}
+
+/* Secondary Button - Simple Outline */
+.btn.secondary-btn {
+ background: transparent;
+ border: 1px solid var(--border-color-light);
+ color: var(--text-light);
+ box-shadow: none;
+}
+.btn.secondary-btn:hover {
+  background: color-mix(in srgb, var(--border-color-light), transparent 80%); /* Subtle bg */
+  color: var(--text-light);
+  border-color: var(--border-color-light);
+  box-shadow: var(--shadow-xs);
+}
+
+/* Dark Mode Buttons */
+body.dark-mode .btn {
+  background: var(--accent-primary); /* Muted Gold */
+  color: var(--bg-dark); /* Dark text */
+  box-shadow: var(--shadow-xs);
+}
+body.dark-mode .btn:hover {
+  background: var(--accent-hover); /* Lighter gold */
+   box-shadow: var(--shadow-sm);
+}
+body.dark-mode .btn:active {
+   background: color-mix(in srgb, var(--accent-hover), #000 10%);
+   box-shadow: var(--shadow-xs);
+}
+body.dark-mode .btn.secondary-btn {
+  background: transparent;
+  border-color: var(--border-color-dark);
+  color: var(--text-dark);
+  box-shadow: none;
+}
+body.dark-mode .btn.secondary-btn:hover {
+   background: color-mix(in srgb, var(--border-color-dark), transparent 85%);
+   border-color: var(--border-color-dark);
+   color: var(--text-dark);
+    box-shadow: var(--shadow-xs);
+}
+
+/* ================================
+  Room Box / Cards (Clean & Solid)
+================================ */
+.hero-dynamic-content {
+  width: 100%;
+  max-width: 550px;
+}
+
+.room-box,
+.file-send.card {
+  background: var(--bg-container-light); /* Solid background */
+  /* Remove backdrop-filter */
+  border-radius: 10px; /* Standard radius */
+  padding: clamp(1.5rem, 5vw, 2rem); /* Adjust padding */
+  box-shadow: var(--shadow-md); /* Standard shadow */
+  border: 1px solid var(--border-color-light);
+  text-align: center;
+  margin: 1.5rem auto 0;
+  transition: var(--transition-std);
+  transform: scale(1);
+  opacity: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.room-box h2,
+.card-header h3 {
+  font-size: clamp(1.4rem, 4vw, 1.6rem);
+  margin-bottom: 1.2rem;
+  color: var(--text-light); /* Main text color */
+  font-weight: 600; /* Standard bold */
+  text-shadow: none;
+}
+
+.room-box p,
+.card-header p,
+.card-footer p {
+  color: color-mix(in srgb, var(--text-light), transparent 30%); /* Lighter gray */
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.card-header p span, .card-footer p span {
+  color: var(--text-light);
+  font-weight: 500; /* Standard weight */
+}
+
+/* Buttons within boxes */
+.room-box button,
+.file-send.card button,
+.file-send.card label.btn {
+  /* Use general .btn styles defined above */
+  margin-top: 1rem;
+  display: inline-block;
+}
+/* Remove specific background/shadow overrides unless needed */
+
+/* Disabled state - Subtle */
+.file-send.card button:disabled {
+  background: color-mix(in srgb, var(--border-color-light), transparent 50%);
+  box-shadow: none;
+  color: color-mix(in srgb, var(--text-light), transparent 60%);
+  cursor: not-allowed;
+  transform: none;
+  border-color: transparent;
+}
+.file-send.card button:disabled:hover {
+ background: color-mix(in srgb, var(--border-color-light), transparent 50%);
+ box-shadow: none;
+}
+
+/* Input Fields - Classic */
+.room-box input[type="text"],
+.room-box input[type="number"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color-light);
+  border-radius: 6px;
+  background-color: var(--bg-light); /* Match page background */
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: var(--transition-fast);
+  box-shadow: var(--shadow-inset);
+}
+.room-box input[type="text"]:focus,
+.room-box input[type="number"]:focus {
+  border-color: var(--accent-secondary); /* Muted accent focus */
+  background-color: var(--bg-light);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-secondary), transparent 80%); /* Subtle focus ring */
+  outline: none;
+}
+
+/* Dark Mode Room Box */
+body.dark-mode .room-box,
+body.dark-mode .file-send.card {
+  background: var(--bg-container-dark);
+  border-color: var(--border-color-dark);
+  box-shadow: var(--shadow-md);
+}
+body.dark-mode .room-box h2,
+body.dark-mode .card-header h3 {
+  color: var(--text-dark);
+}
+body.dark-mode .room-box p,
+body.dark-mode .card-header p,
+body.dark-mode .card-footer p {
+  color: color-mix(in srgb, var(--text-dark), transparent 30%);
+}
+body.dark-mode .card-header p span,
+body.dark-mode .card-footer p span {
+  color: var(--text-dark);
+}
+
+body.dark-mode .file-send.card button:disabled {
+  background: color-mix(in srgb, var(--border-color-dark), transparent 50%);
+  color: color-mix(in srgb, var(--text-dark), transparent 60%);
+}
+
+body.dark-mode .room-box input[type="text"],
+body.dark-mode .room-box input[type="number"] {
+  border-color: var(--border-color-dark);
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+body.dark-mode .room-box input[type="text"]:focus,
+body.dark-mode .room-box input[type="number"]:focus {
+  border-color: var(--accent-primary); /* Muted gold focus */
+  background-color: var(--bg-dark);
+   box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary), transparent 80%);
+}
+
+/* Active state for interfaces - Simple Fade/Slide */
+#send-interface,
+#receive-interface,
+.hero-dynamic-content.hidden {
+  transition: opacity var(--transition-std), transform var(--transition-std), max-height var(--transition-std);
+  transform: translateY(10px); /* Slight slide */
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  display: block !important;
+  pointer-events: none;
+}
+
+#send-interface.active,
+#receive-interface.active,
+.hero-dynamic-content:not(.hidden) {
+  transform: translateY(0);
+  opacity: 1;
+  max-height: 1000px;
+  pointer-events: auto;
+}
+
+/* ================================
+  File Transfer Screen Specifics (Clean)
+================================ */
+.fs-screen {
+  width: 100%;
+}
+.file-send.card {
+  text-align: left;
+}
+.card-header {
+  border-bottom: 1px solid var(--border-color-light);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+body.dark-mode .card-header {
+  border-bottom-color: var(--border-color-dark);
+}
+
+.card-body .file-select {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.file-select #chosen-file-name {
+  font-style: normal; /* No italic */
+  color: color-mix(in srgb, var(--text-light), transparent 40%); /* Slightly darker */
+  flex-grow: 1;
+  min-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body.dark-mode .file-select #chosen-file-name {
+   color: color-mix(in srgb, var(--text-dark), transparent 40%);
+}
+
+.files-list {
+  margin-top: 1rem;
+  /* Add styles if needed */
+}
+
+.card-footer {
+  border-top: 1px solid var(--border-color-light);
+  padding-top: 1rem;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+body.dark-mode .card-footer {
+  border-top-color: var(--border-color-dark);
+}
+.card-footer .status-text {
+  margin-bottom: 0;
+  flex-grow: 1;
+}
+/* Disconnect Button - Muted Red */
+.card-footer button {
+  margin-top: 0;
+  background: transparent;
+  color: var(--accent-error);
+  border: 1px solid var(--accent-error);
+  box-shadow: none;
+}
+.card-footer button:hover {
+  background: color-mix(in srgb, var(--accent-error), transparent 90%);
+  color: var(--accent-error-hover);
+  border-color: var(--accent-error-hover);
+  transform: translateY(-1px);
+   box-shadow: var(--shadow-xs);
+}
+body.dark-mode .card-footer button {
+   color: var(--accent-error); /* Keep color consistent */
+   border-color: var(--accent-error);
+}
+body.dark-mode .card-footer button:hover {
+   background: color-mix(in srgb, var(--accent-error), transparent 92%);
+   color: var(--accent-error-hover);
+   border-color: var(--accent-error-hover);
+}
+
+/* ================================
+  Utility Classes
+================================ */
+.hidden { /* Can rely on JS active/hidden logic now */ }
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+
+/* ========================== */
+/* Enhanced About Section (Subtle "Old Money") */
+/* ========================== */
+
+.about-section {
+  padding: clamp(4rem, 10vh, 6rem) 1rem;
+  position: relative;
+  overflow: hidden;
+  color: var(--text-light); /* Use default text color */
+  background-color: #e9e5e0; /* Soft Beige/Warm Gray background */
+  /* Remove gradient background */
+  transition: background-color var(--transition-std);
+  border-top: 1px solid var(--border-color-light);
+  border-bottom: 1px solid var(--border-color-light);
+}
+body.dark-mode .about-section {
+  background-color: #2c3e50; /* Muted Dark Blue/Gray */
+  color: var(--text-dark);
+   border-top-color: var(--border-color-dark);
+   border-bottom-color: var(--border-color-dark);
+}
+
+
+/* Remove ::before overlay pattern or make very subtle */
+.about-section::before {
+  display: none; /* Hide pattern for cleaner look */
+}
+
+.about-container {
+  max-width: 1100px; /* Slightly narrower */
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 3rem);
+  position: relative;
+  z-index: 1;
+  padding: 0; /* Remove padding */
+  background-color: transparent; /* No container background */
+  border-radius: 0; /* No rounding */
+  box-shadow: none; /* No shadow */
+  /* Remove backdrop-filter */
+  border: none; /* No border */
+  transition: max-height var(--transition-slow), opacity var(--transition-slow), transform var(--transition-slow);
+  transform-origin: top center;
+}
+
+/* Collapsed state for About - Simplified */
+.about-container.collapsed {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: scaleY(0.95) translateY(-5px);
+  pointer-events: none;
+  /* Remove padding/margin/border changes */
+  margin-top: -1rem; /* Pull up slightly when hidden */
+}
+
+
+.about-text {
+  flex: 1 1 55%;
+  min-width: 300px;
+}
+
+.about-text h2 {
+  font-size: clamp(1.8rem, 5vw, 2.4rem); /* Adjusted size */
+  font-weight: 600; /* Standard bold */
+  /* Optional: Use a serif font if defined: font-family: var(--font-heading); */
+  margin-bottom: 1.2rem;
+  position: relative;
+  display: inline-block;
+  color: var(--text-light); /* Main text color */
+  text-shadow: none; /* No shadow */
+}
+
+/* Simpler underline for About H2 */
+.about-text h2::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 50px; /* Short fixed width */
+  height: 2px; /* Thinner */
+  background: var(--accent-primary); /* Muted gold */
+  border-radius: 1px;
+  filter: none; /* No blur */
+  transition: width 0.3s ease-out;
+}
+
+.about-text p {
+  font-size: clamp(0.95rem, 2.5vw, 1rem);
+  line-height: 1.7; /* Good readability */
+  margin-bottom: 1rem;
+  color: color-mix(in srgb, var(--text-light), transparent 15%); /* Slightly lighter text */
+  opacity: 1; /* Full opacity */
+}
+
+.about-text p strong {
+  color: var(--text-light); /* Main text color for strong */
+  font-weight: 600;
+}
+
+
+.about-visual {
+  flex: 1 1 40%;
+  min-width: 280px;
+  text-align: center;
+  perspective: none; /* Remove perspective */
+}
+
+.about-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* Subtle rounding */
+  box-shadow: var(--shadow-md); /* Standard subtle shadow */
+  transition: transform var(--transition-std), box-shadow var(--transition-std);
+  /* Remove transform */
+  will-change: transform, box-shadow;
+  border: 1px solid var(--border-color-light); /* Subtle border */
+}
+
+/* Simple hover for About image */
+.about-visual:hover .about-image {
+  transform: scale(1.02); /* Very subtle scale */
+  box-shadow: var(--shadow-lg); /* Slightly larger shadow */
+  /* Remove rotation/translateZ/border color change */
+}
+body.dark-mode .about-image {
+   border-color: var(--border-color-dark);
+}
+
+
+/* Collapsible Toggle Button (About) - Matches .btn style */
+.collapse-toggle {
+  display: none;
+  /* Inherit .btn styles or redefine minimally */
+  background: transparent;
+  border: 1px solid var(--border-color-light);
+  color: var(--text-light);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  margin: 0 auto 2rem auto;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: none;
+  text-align: center;
+}
+.collapse-toggle:hover {
+  background: color-mix(in srgb, var(--border-color-light), transparent 80%);
+  border-color: var(--border-color-light);
+  box-shadow: var(--shadow-xs);
+  color: var(--text-light);
+   transform: translateY(-1px);
+}
+body.dark-mode .collapse-toggle {
+  border-color: var(--border-color-dark);
+  color: var(--text-dark);
+}
+body.dark-mode .collapse-toggle:hover {
+   background: color-mix(in srgb, var(--border-color-dark), transparent 85%);
+   border-color: var(--border-color-dark);
+   color: var(--text-dark);
+   box-shadow: var(--shadow-xs);
+}
+
+
+.collapse-toggle i {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease-out; /* Smooth rotation */
+}
+.collapse-toggle.active i {
+  transform: rotate(180deg);
+}
+
+
+/* --- Responsive Adjustments for About Section (Subtle) --- */
+@media screen and (max-width: 768px) {
+  .about-container {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+  }
+  .about-text h2::after {
+      margin: 0 auto; /* Center underline */
+      left: 0; right: 0;
+  }
+  .about-visual:hover .about-image {
+      transform: scale(1.01); /* Even subtler on mobile */
+      box-shadow: var(--shadow-md);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .collapse-toggle {
+      display: block;
+  }
+}
+
+/* Features Section */
+/*                  */
+.features-section {
+  /* Padding with clamp for responsiveness */
+  padding: clamp(4rem, 8vh, 6rem) 1rem;
+  /* Use a slightly different background to subtly separate sections */
+  background-color: color-mix(in srgb, var(--bg-light), var(--text-light) 2%); /* Very subtle off-white/gray */
+  border-top: 1px solid var(--border-color-light);
+  border-bottom: 1px solid var(--border-color-light); /* Add bottom border too */
+  overflow: hidden; /* Contain AOS animations */
+  transition: background-color var(--transition-std), border-color var(--transition-std);
+}
+
+/* Dark mode background for features section */
+body.dark-mode .features-section {
+   background-color: color-mix(in srgb, var(--bg-dark), #fff 2%); /* Very subtle lighter dark */
+   border-top-color: var(--border-color-dark);
+   border-bottom-color: var(--border-color-dark);
+}
+
+/* Container for centering content */
+.features-container {
+  max-width: 1200px; /* Consistent max-width */
+  margin: 0 auto;
+  padding: 0 1rem; /* Add horizontal padding if needed inside container */
+  text-align: center;
+}
+
+/* General Section Heading Style (if not already defined globally) */
+.section-heading {
+  font-size: clamp(1.8rem, 5vw, 2.4rem); /* Responsive heading size */
+  font-weight: 600; /* Standard bold */
+  color: var(--text-light);
+  margin-bottom: 3.5rem; /* Increased space below heading */
+  position: relative;
+  display: inline-block; /* Allow centering of pseudo-element */
+  /* Optional: Use a serif font if defined: font-family: var(--font-heading); */
+}
+
+/* Subtle underline for section headings */
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; /* Position below text */
+  left: 50%;
+  transform: translateX(-50%); /* Center the underline */
+  width: 60px; /* Fixed short width */
+  height: 2px; /* Thin underline */
+  background: var(--accent-primary); /* Muted gold accent */
+  border-radius: 1px;
+}
+
+/* Grid layout for feature items */
+.features-grid {
+  display: grid;
+  /* Creates responsive columns: fits as many 280px+ columns as possible */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem; /* Consistent gap */
+}
+
+/* Individual feature item styling */
+.feature-item {
+  background-color: var(--bg-container-light); /* Use container background color */
+  padding: 2rem 1.5rem; /* Standard padding */
+  border-radius: 8px; /* Subtle rounding */
+  border: 1px solid var(--border-color-light); /* Standard border */
+  box-shadow: var(--shadow-sm); /* Subtle shadow */
+  text-align: center;
+  /* Smooth transition for hover effects */
+  transition: transform var(--transition-std), box-shadow var(--transition-std), border-color var(--transition-std);
+}
+
+/* Subtle hover effect for feature items */
+.feature-item:hover {
+  transform: translateY(-4px); /* Slightly more lift */
+  box-shadow: var(--shadow-md); /* Increase shadow slightly */
+  border-color: color-mix(in srgb, var(--border-color-light), var(--text-light) 5%); /* Slightly darken border */
+}
+
+/* Dark mode styles for feature items */
+body.dark-mode .feature-item {
+   background-color: var(--bg-container-dark);
+   border-color: var(--border-color-dark);
+   box-shadow: var(--shadow-sm); /* Use dark mode shadow variable if defined, else default */
+}
+body.dark-mode .feature-item:hover {
+  box-shadow: var(--shadow-md);
+  border-color: color-mix(in srgb, var(--border-color-dark), #fff 10%); /* Slightly lighten border */
+}
+
+/* Styling for the icon within a feature item */
+.feature-icon {
+  font-size: 2.2rem; /* Slightly smaller icon */
+  color: var(--accent-secondary); /* Muted teal/blue accent */
+  margin-bottom: 1.25rem; /* Space below icon */
+  display: inline-block;
+  transition: color var(--transition-fast);
+}
+/* Optional: Change icon color on hover */
+.feature-item:hover .feature-icon {
+  color: var(--accent-primary); /* Muted gold on hover */
+}
+
+
+/* Styling for the feature title */
+.feature-title {
+  font-size: 1.15rem; /* Slightly adjusted size */
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 0.75rem;
+}
+
+/* Styling for the feature description text */
+.feature-description {
+  font-size: 0.9rem; /* Slightly smaller description */
+  line-height: 1.65; /* Good line spacing */
+  /* Use a slightly lighter shade of the main text color */
+  color: color-mix(in srgb, var(--text-light), transparent 20%);
+}
+
+/* Dark mode description text */
+body.dark-mode .feature-description {
+   color: color-mix(in srgb, var(--text-dark), transparent 20%);
+}
+
+/* FAQ Section */
+/*                  */
+.faq-section {
+  padding: clamp(4rem, 8vh, 6rem) 1rem;
+  /* Alternate background slightly from features */
+  background-color: var(--bg-light);
+  border-top: 1px solid var(--border-color-light);
+  border-bottom: 1px solid var(--border-color-light);
+  overflow: hidden;
+  transition: background-color var(--transition-std), border-color var(--transition-std);
+}
+
+body.dark-mode .faq-section {
+   background-color: var(--bg-dark);
+   border-top-color: var(--border-color-dark);
+   border-bottom-color: var(--border-color-dark);
+}
+
+.faq-container {
+  max-width: 900px; /* Slightly narrower for focused FAQ list */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Use existing .section-heading style */
+.faq-section .section-heading {
+  text-align: center; /* Ensure heading is centered */
+  margin-bottom: 3rem;
+}
+
+.faq-list {
+  border: 1px solid var(--border-color-light);
+  border-radius: 8px; /* Rounded corners for the list container */
+  overflow: hidden; /* Clip corners */
+  box-shadow: var(--shadow-sm);
+}
+body.dark-mode .faq-list {
+   border-color: var(--border-color-dark);
+   box-shadow: var(--shadow-sm);
+}
+
+
+.faq-item {
+  /* Border only between items */
+  border-bottom: 1px solid var(--border-color-light);
+}
+.faq-item:last-child {
+  border-bottom: none; /* Remove border from last item */
+}
+body.dark-mode .faq-item {
+   border-bottom-color: var(--border-color-dark);
+}
+
+
+.faq-question {
+  /* Button Styling */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: var(--bg-container-light);
+  border: none;
+  padding: 1.25rem 1.5rem; /* Generous padding */
+  font-family: inherit; /* Use body font */
+  font-size: 1.05rem; /* Slightly larger question text */
+  font-weight: 600; /* Bolder question */
+  color: var(--text-light);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.faq-question:hover {
+  background-color: color-mix(in srgb, var(--bg-light), var(--text-light) 3%); /* Subtle hover */
+}
+
+body.dark-mode .faq-question {
+   background-color: var(--bg-container-dark);
+   color: var(--text-dark);
+}
+body.dark-mode .faq-question:hover {
+    background-color: color-mix(in srgb, var(--bg-dark), #fff 5%);
+}
+
+
+.faq-question span {
+  /* Allows text to wrap if needed */
+  flex-grow: 1;
+  margin-right: 1rem; /* Space before icon */
+}
+
+.faq-question i {
+  /* Icon styling */
+  font-size: 0.9rem;
+  color: var(--accent-secondary); /* Muted teal/blue icon */
+  transition: transform var(--transition-slow) ease-out; /* Smooth rotation */
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+/* Icon rotation when question button is active */
+.faq-question.active i {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  /* Answer Styling - Initially Hidden */
+  background-color: var(--bg-light); /* Slightly different bg for answer */
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height var(--transition-slow) ease-out,
+              opacity var(--transition-slow) ease-out,
+              padding var(--transition-slow) ease-out,
+              margin var(--transition-slow) ease-out;
+  /* Remove padding/margin when hidden */
+  padding: 0 1.5rem;
+  margin: 0;
+}
+
+/* Styles for when the answer is open */
+.faq-answer.open {
+  opacity: 1;
+  /* Set max-height large enough for content */
+  max-height: 500px; /* Adjust if answers are very long */
+  padding: 1.5rem 1.5rem; /* Add padding back */
+  margin-bottom: 0; /* Reset margin if needed */
+}
+
+
+.faq-answer p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--text-light), transparent 10%); /* Standard paragraph color */
+}
+.faq-answer p + p {
+  margin-top: 1rem; /* Space between paragraphs in an answer */
+}
+
+body.dark-mode .faq-answer {
+   background-color: color-mix(in srgb, var(--bg-dark), #000 5%); /* Slightly darker answer bg */
+}
+body.dark-mode .faq-answer p {
+   color: color-mix(in srgb, var(--text-dark), transparent 10%);
+}
+
+/* Contact Section CSS        */
+/* ========================== */
+
+.contact-section {
+  padding: clamp(4rem, 8vh, 6rem) 1rem;
+  /* Match FAQ background or choose another subtle variation */
+  background-color: color-mix(in srgb, var(--bg-light), var(--text-light) 2%);
+  border-top: 1px solid var(--border-color-light);
+  /* No bottom border if footer follows directly */
+  transition: background-color var(--transition-std), border-color var(--transition-std);
+}
+
+body.dark-mode .contact-section {
+   background-color: color-mix(in srgb, var(--bg-dark), #fff 2%);
+   border-top-color: var(--border-color-dark);
+}
+
+.contact-container {
+  max-width: 700px; /* Narrower container for form focus */
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+/* Use existing .section-heading style */
+.contact-section .section-heading {
+  margin-bottom: 1rem; /* Less space below heading */
+}
+
+.contact-intro {
+  font-size: 1rem;
+  color: color-mix(in srgb, var(--text-light), transparent 25%);
+  margin-bottom: 2.5rem; /* Space before form */
+  max-width: 500px; /* Limit intro text width */
+  margin-left: auto;
+  margin-right: auto;
+}
+body.dark-mode .contact-intro {
+   color: color-mix(in srgb, var(--text-dark), transparent 25%);
+}
+
+
+.contact-form {
+  max-width: 100%; /* Form takes container width */
+  text-align: left; /* Align labels/inputs left */
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+body.dark-mode .form-group label {
+   color: var(--text-dark);
+}
+
+
+/* Style inputs and textarea like previous inputs */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem; /* Slightly more padding */
+  border: 1px solid var(--border-color-light);
+  border-radius: 6px;
+  background-color: var(--bg-container-light); /* Use container bg */
+  color: var(--text-light);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition-fast);
+  box-shadow: var(--shadow-inset);
+}
+.contact-form textarea {
+  resize: vertical; /* Allow vertical resize only */
+  min-height: 120px;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent-secondary); /* Muted accent focus */
+  background-color: var(--bg-container-light);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-secondary), transparent 80%);
+  outline: none;
+}
+
+/* Dark mode inputs */
+body.dark-mode .contact-form input[type="text"],
+body.dark-mode .contact-form input[type="email"],
+body.dark-mode .contact-form textarea {
+  border-color: var(--border-color-dark);
+  background-color: var(--bg-container-dark);
+  color: var(--text-dark);
+}
+body.dark-mode .contact-form input[type="text"]:focus,
+body.dark-mode .contact-form input[type="email"]:focus,
+body.dark-mode .contact-form textarea:focus {
+  border-color: var(--accent-primary); /* Muted gold focus */
+  background-color: var(--bg-container-dark);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary), transparent 80%);
+}
+
+.form-submit {
+  text-align: center; /* Center the submit button */
+  margin-top: 2rem;
+}
+
+/* Use existing .btn styles for the submit button */
+.contact-form button[type="submit"].btn {
+  /* Add any specific overrides if needed */
+  min-width: 180px; /* Give button some minimum width */
+}
+
+
+/* ========================== */
+/* Footer CSS                 */
+/* ========================== */
+
+.footer {
+  padding: 2rem 1rem;
+  background-color: var(--bg-dark); /* Use dark background */
+  color: color-mix(in srgb, var(--text-dark), transparent 30%); /* Muted text color */
+  border-top: 1px solid var(--border-color-dark);
+  margin-top: auto; /* Push footer to bottom if content is short */
+}
+
+body.dark-mode .footer {
+  /* Optional: make slightly different in dark mode if needed */
+   background-color: color-mix(in srgb, var(--bg-dark), #000 30%); /* Even darker */
+   border-top-color: color-mix(in srgb, var(--border-color-dark), #000 50%);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.footer-container p {
+  margin: 0;
+}
+
+/* Optional styling for footer links */
+.footer-links {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  color: color-mix(in srgb, var(--text-dark), transparent 40%);
+  font-size: 1.2rem;
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--text-dark);
+}

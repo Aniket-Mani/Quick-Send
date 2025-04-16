@@ -1,0 +1,365 @@
+/* Styles specific to the hero section when used for joining */
+.join-screen {
+    /* Add specific layout adjustments if needed */
+    /* Example: Ensure vertical centering works well */
+    /* justify-content: center; */
+}
+
+.join-screen .hero-container h1 {
+    /* Style the main heading on the receiver page */
+    font-size: clamp(1.8rem, 5vw, 2.2rem); /* Slightly adjusted */
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+}
+body.dark-mode .join-screen .hero-container h1 {
+    color: var(--text-dark);
+}
+
+.join-screen .hero-container p {
+    /* Style the introductory paragraph */
+    color: color-mix(in srgb, var(--text-light), transparent 25%);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    max-width: 450px;
+    line-height: 1.6;
+}
+body.dark-mode .join-screen .hero-container p {
+     color: color-mix(in srgb, var(--text-dark), transparent 25%);
+}
+
+/* Wrapper for form inputs on join screen */
+.form-input {
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 350px; /* Limit width */
+    display: flex;
+    justify-content: center;
+}
+
+/* Input field for Room ID */
+#join-id {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color-light);
+    border-radius: 6px;
+    background-color: var(--bg-container-light);
+    color: var(--text-light);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-inset);
+    text-align: center;
+}
+#join-id:focus {
+    border-color: var(--accent-secondary);
+    background-color: var(--bg-container-light);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-secondary), transparent 80%);
+    outline: none;
+}
+body.dark-mode #join-id {
+    border-color: var(--border-color-dark);
+    background-color: var(--bg-container-dark);
+    color: var(--text-dark);
+}
+body.dark-mode #join-id:focus {
+    border-color: var(--accent-primary);
+    background-color: var(--bg-container-dark);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary), transparent 80%);
+}
+
+/* QR Scanner Container */
+#qr-scanner-container {
+    border: 1px dashed var(--border-color-light);
+    border-radius: 8px;
+    padding: 0.5rem;
+    background-color: color-mix(in srgb, var(--bg-light), var(--text-light) 2%);
+    /* display: none; is handled inline/by JS */
+    max-width: 300px; /* Ensure it doesn't get too wide */
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Maintain square aspect ratio */
+    position: relative; /* For potential absolute positioning inside */
+    box-shadow: var(--shadow-xs);
+}
+body.dark-mode #qr-scanner-container {
+     border-color: var(--border-color-dark);
+     background-color: color-mix(in srgb, var(--bg-dark), #fff 2%);
+}
+/* Style the video element created by html5-qrcode */
+#qr-scanner-container video {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover; /* Cover the container */
+    border-radius: 4px;
+}
+/* Style the div html5-qrcode creates if needed */
+#qr-scanner > div {
+    border: none !important; /* Override default borders from library if any */
+}
+
+
+/* --- File Transfer Screen Styles (#file-transfer-screen) --- */
+
+/* Ensure the screen takes space when visible */
+.fs-screen {
+    width: 100%;
+    padding: clamp(2rem, 5vh, 3rem) 1rem; /* Add padding when visible */
+}
+
+/* Card specific to receiver */
+.file-receive.card {
+    /* Inherit .card styles from style.css */
+    /* Add specific overrides if needed */
+    text-align: left;
+    max-width: 800px; /* Wider card for file list */
+    margin: 0 auto; /* Center the card */
+     /* Ensure base card styles like background, border, shadow are applied */
+     /* These should come from a .card rule in style.css */
+     background-color: var(--bg-container-light);
+     border: 1px solid var(--border-color-light);
+     box-shadow: var(--shadow-md);
+     border-radius: 10px;
+     padding: clamp(1.5rem, 5vw, 2rem);
+}
+body.dark-mode .file-receive.card {
+    background-color: var(--bg-container-dark);
+    border-color: var(--border-color-dark);
+    box-shadow: var(--shadow-md);
+}
+
+
+/* Section containing the file list */
+.files-list-section {
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color-light);
+}
+body.dark-mode .section-title {
+     color: var(--text-dark);
+     border-bottom-color: var(--border-color-dark);
+}
+
+/* Container for the file list */
+.files-list {
+    border: 1px solid var(--border-color-light);
+    border-radius: 6px;
+    overflow: hidden;
+}
+body.dark-mode .files-list {
+     border-color: var(--border-color-dark);
+}
+
+
+/* Header row for the file list */
+.files-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: color-mix(in srgb, var(--bg-light), var(--text-light) 3%);
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem; /* Smaller header text */
+    font-weight: 600;
+    color: color-mix(in srgb, var(--text-light), transparent 30%); /* Muted header text */
+    border-bottom: 1px solid var(--border-color-light);
+    text-transform: uppercase; /* Optional: Uppercase headers */
+    letter-spacing: 0.5px;
+}
+body.dark-mode .files-header {
+     background-color: color-mix(in srgb, var(--bg-dark), #fff 4%);
+     color: color-mix(in srgb, var(--text-dark), transparent 30%);
+     border-bottom-color: var(--border-color-dark);
+}
+
+/* Spans within the header */
+.files-header span {
+    flex-shrink: 0;
+    text-align: left;
+    padding: 0 0.25rem; /* Add slight padding */
+}
+/* Adjusted flex-basis for new progress bar column */
+.file-title { flex-basis: 45%; }
+.file-size-title { flex-basis: 15%; text-align: right; }
+.file-status-title { flex-basis: 40%; text-align: center; } /* Combined Status/Progress */
+
+
+/* Container for dynamically added file items */
+.files-items {
+    max-height: 300px; /* Limit height and make scrollable */
+    overflow-y: auto;
+    background-color: var(--bg-container-light); /* Ensure background */
+}
+body.dark-mode .files-items {
+     background-color: var(--bg-container-dark);
+}
+
+
+/* Individual file item row (added by JS) */
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border-color-light);
+    /* background-color: var(--bg-container-light); */ /* Set on parent .files-items */
+    gap: 0.5rem; /* Add gap between columns */
+}
+.file-item:last-child {
+    border-bottom: none;
+}
+body.dark-mode .file-item {
+     border-bottom-color: var(--border-color-dark);
+}
+
+/* Elements within a file item */
+.file-item > * { /* Direct children */
+    flex-shrink: 0; /* Prevent shrinking by default */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.file-name {
+    flex-basis: 45%;
+    font-weight: 500;
+    padding-right: 0.5rem;
+}
+.file-size {
+    flex-basis: 15%;
+    text-align: right;
+    color: color-mix(in srgb, var(--text-light), transparent 30%);
+    padding-right: 0.5rem;
+}
+.file-status { /* This now contains the progress bar and text */
+    flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    padding-left: 0.5rem;
+}
+.file-action {
+    flex-basis: 0%; /* Hide action column if empty */
+    flex-grow: 0;
+    flex-shrink: 1; /* Allow shrinking if needed */
+    /* Add styles if actions appear */
+}
+
+body.dark-mode .file-size {
+    color: color-mix(in srgb, var(--text-dark), transparent 30%);
+}
+
+/* --- Styles for Per-File Progress Bar --- */
+
+/* Container holding the bar itself */
+.progress-bar-container {
+    height: 8px;
+    background-color: var(--border-color-light);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+    box-shadow: var(--shadow-inset);
+}
+body.dark-mode .progress-bar-container {
+     background-color: var(--border-color-dark);
+}
+
+/* The colored fill element */
+.progress-bar-fill {
+    height: 100%;
+    width: 0%; /* Controlled by JS */
+    background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+    border-radius: 4px;
+    transition: width 0.4s ease-out, background-color 0.4s ease-out; /* Add transition for color change */
+}
+
+/* Styling for completion status */
+.progress-bar-fill.complete {
+     background: #28a745; /* Success green */
+     width: 100%; /* Ensure full on complete */
+}
+
+/* Styling for error status */
+.progress-bar-fill.error {
+     background: var(--accent-error); /* Error red */
+     width: 100%; /* Fill bar on error */
+}
+
+/* Text showing percentage or status */
+.progress-text {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    font-weight: 500;
+    color: color-mix(in srgb, var(--text-light), transparent 30%);
+    transition: color 0.4s ease-out;
+}
+body.dark-mode .progress-text {
+     color: color-mix(in srgb, var(--text-dark), transparent 30%);
+}
+
+/* Style text based on parent item status */
+.file-item.complete .progress-text {
+    color: #28a745;
+    font-weight: 600;
+}
+.file-item.error .progress-text {
+    color: var(--accent-error);
+    font-weight: 600;
+}
+
+
+/* --- Footer Buttons --- */
+
+/* Specific styles for Danger/Success buttons */
+.btn.danger-btn {
+    background: var(--accent-error);
+    color: #fff;
+    border-color: transparent;
+}
+.btn.danger-btn:hover {
+    background: var(--accent-error-hover);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: var(--shadow-sm);
+}
+body.dark-mode .btn.danger-btn {
+     box-shadow: var(--shadow-xs);
+}
+body.dark-mode .btn.danger-btn:hover {
+     box-shadow: var(--shadow-sm);
+}
+
+/* Success button (if used elsewhere, currently removed from receiver footer) */
+.btn.success-btn {
+    background: #28a745;
+    color: #fff;
+    border-color: transparent;
+}
+.btn.success-btn:hover {
+    background: #218838;
+    color: #fff;
+    border-color: transparent;
+     box-shadow: var(--shadow-sm);
+}
+body.dark-mode .btn.success-btn {
+     box-shadow: var(--shadow-xs);
+}
+body.dark-mode .btn.success-btn:hover {
+     box-shadow: var(--shadow-sm);
+}
+
+/* Ensure footer buttons have some spacing if needed */
+.file-receive.card .card-footer {
+    /* Inherits base .card-footer styles from style.css */
+     justify-content: flex-end; /* Align buttons right */
+     gap: 0.75rem;
+}
+.file-receive.card .card-footer button {
+    margin-top: 0; /* Override any inherited margin */
+}
