@@ -1,26 +1,174 @@
-Quick Send 🚀A real-time, peer-to-peer (P2P) inspired file sharing web application built with Node.js, Express, and Socket.IO. Allows users to quickly send files directly between devices on the same network without needing accounts or installations.DescriptionQuick Send provides a simple interface for transferring files directly between two browsers. One user acts as a sender, creating a unique room, while the other acts as a receiver, joining the room using a code or QR scan. The application prioritizes direct connections (using WebRTC principles, though the current server relays data) for speed and privacy.Key Features ✨Real-time Transfer: Files are chunked and streamed directly between connected peers via a server relay.No Sign-up Required: Works entirely in the browser with no need for user accounts or software installation.Easy Connection: Connect devices using simple, unique Room Codes or by scanning a QR code (requires camera access on the receiver).Secure & Private Focus: Aims for direct P2P transfer principles, minimizing server interaction with file content (the server currently relays chunks).Client-Side File Size Limit: Configurable limit (e.g., 1GB) to prevent accidental selection of extremely large files.Modern File Handling: Utilizes the File System Access API on the receiver side (when available) for efficient saving, with a memory buffer fallback.Dark/Light Theme: User-selectable theme preference stored in local storage.Responsive Design: The UI adapts to different screen sizes.Transfer Progress: Basic per-file progress indication on the receiver side.Connection Status: Visual indicator for server connection.Tech Stack 💻Backend:Node.jsExpress.js (for serving static files and basic routing)Socket.IO (for WebSocket communication, signaling, and data relay)dotenv (for environment variables)Frontend:HTML5CSS3 (with CSS Variables)Vanilla JavaScript (ES Modules)Font Awesome (for icons)qrcode.js (for generating QR codes)html5-qrcode (for scanning QR codes)aos (Animate On Scroll library for subtle animations)Project Structure 📁quick-send/
-├── public/ # Static files served by Express
-│   ├── index.html # Main sender page
-│   ├── receiver.html # Receiver page
-│   ├── style.css # Main shared styles
-│   ├── receiver.css # Styles specific to receiver page
-│   ├── JS/
-│   │   ├── main.js # Client-side logic for sender (index.html)
-│   │   ├── receiver.js # Client-side logic for receiver (receiver.html)
-│   │   ├── style.js # UI interactions (theme, mobile nav, etc.)
-│   │   └── LoadPage.js # Smooth scrolling logic
-│   │   └── FileSharing.js # handles the file sharing logic
-│   ├── images/
-│   │   └── about-illustration.svg
-│   └── favicon/
-│       └── ... # Favicon files
-├── server.js # Main backend server file
-├── package.json
-├── package-lock.json
-└── .env # Environment variables (e.g., PORT)
-(Note: Ensure your files match this structure, especially placing static assets inside the public folder as configured in server.js)Setup & Installation ⚙️Prerequisites:Node.js (includes npm) installed (e.g., LTS version)Clone the Repository:git clone <your-repository-url>
+# Quick Send 🚀
+
+**Quick Send** is a real-time, peer-to-peer (P2P)-inspired file sharing web app built with **Node.js**, **Express**, and **Socket.IO**, designed for fast, direct file transfers between devices on the same network — all through your browser, with no installation or sign-up required.
+
+---
+
+## 🌟 Goals
+
+- Provide a free, open-source tool for local network file sharing.  
+- Ensure ease of use: no user accounts, no app installs.  
+- Explore P2P-style transfers that emphasize speed, privacy, and minimal server intervention.
+
+---
+
+## ✨ Features
+
+- **Real-time Transfer**: File chunks are streamed between peers (via Socket.IO relay).  
+- **No Sign-Up**: 100% in-browser, no user accounts needed.  
+- **Easy Connections**: Share Room Code or scan a QR to connect.  
+- **Modern File Handling**: Uses File System Access API when available.  
+- **File Size Limit**: Configurable limit (e.g., 1GB) to prevent oversized file transfers.  
+- **Responsive UI**: Includes dark/light themes, connection status, and progress feedback.
+
+---
+
+## 💻 Tech Stack
+
+### Backend
+
+- Node.js  
+- Express.js (serving static files & routing)  
+- Socket.IO (signaling & data relay)  
+- dotenv (for environment variables)
+
+### Frontend
+
+- HTML5, CSS3 (CSS Variables)  
+- Vanilla JavaScript (ES Modules)  
+- Font Awesome (icons)  
+- `qrcode.js` (QR generation)  
+- `html5-qrcode` (QR scanning)  
+- AOS (scroll animations)
+
+---
+
+## ⚙️ Setup & Installation
+
+### Prerequisites
+
+- Node.js (LTS version recommended)
+
+### Steps
+
+```bash
+git clone <your-repository-url>
 cd quick-send
-Install Dependencies:npm install
-Create Environment File:Create a file named .env in the root directory.Add the following line, adjusting the port if needed:PORT=5050
-Running the Application ▶️Start the Server:node server.js
-Alternatively, use nodemon for development (auto-restarts on changes): nodemon server.js (requires npm install -g nodemon or as a dev dependency).Access the Application:Sender: Open your browser and navigate to http://localhost:5050 (or your configured port).Receiver: Open your browser (preferably on a different device on the same network for testing transfer) and navigate to http://localhost:5050/receiver.html.Network Access: To access from other devices on your local network, find your computer's local IP address (e.g., 192.168.x.x) and access http://<your-local-ip>:5050 and http://<your-local-ip>:5050/receiver.html. (See Limitations regarding QR scanning on non-localhost HTTP).Usage Instructions 📖Sender:Open the main page (http://localhost:5050).Click "Send Files".A unique Room Code and QR code will be generated.Share the Room Code or have the receiver scan the QR code.Wait for the receiver to join (status will update).Once the receiver joins, click "Choose File", select the file you want to send (respecting the size limit).Click "Send File".Receiver:Open the receiver page (http://localhost:5050/receiver.html).Option 1 (Code): Enter the Room Code provided by the sender and click "Connect".Option 2 (QR): Click "Scan QR Code". Grant camera permission if prompted. Scan the QR code displayed on the sender's screen.Once connected, wait for the sender to initiate the transfer.If the browser supports the File System Access API, you will be prompted to choose a save location for the incoming file. Accept to start the download.If the API is not supported, the file will be buffered in memory and automatically downloaded as a Blob when the transfer completes (this may fail for very large files).Monitor the progress in the file list.Use the "Cancel Active Transfer" button if needed.Configuration 🔧Port: Set the PORT in the .env file.Server Limits: Constants like MAX_CHUNK_BUFFER_SIZE, PING_TIMEOUT_DEFAULT, TRANSFER_INACTIVITY_TIMEOUT can be adjusted directly in server.js. Be cautious when increasing buffer sizes.Client File Size Limit: The maximum allowed file size check upon selection is configured within the sender's JavaScript (public/JS/main.js).Known Issues & Limitations ⚠️Large File Transfers (>1-2 GB): Transfers of very large files are likely to fail, primarily due to browser memory limitations on the receiver side if the File System Access API is not used (memory buffer fallback). Server resources can also be strained.Secure Context for QR Scan: QR code scanning requires camera access, which needs a secure context (HTTPS or localhost). Scanning will not work when accessing the receiver page via http://<local-ip-address>:port. Use localhost, HTTPS, or other workarounds (like ADB forwarding for Android) for testing this feature.Server Relay: The current implementation primarily relays data through the server. While aiming for P2P principles, it may not establish a direct WebRTC data channel, potentially bottlenecking transfers through the server's bandwidth and resources.Basic Error Handling: Error handling for network interruptions or unexpected issues can be improved.Single File Transfer: The UI currently appears designed for transferring one file at a time per session.LicenseMIT LicenseCopyright (c) 2025 [Aniket Mani]Permission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the "Software"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:The above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.
+npm install
+```
+
+### Environment Setup
+
+Create a `.env` file in the root with:
+
+```env
+PORT=5050
+```
+
+### Start the Server
+
+```bash
+node server.js
+# or with auto-reload:
+npx nodemon server.js
+```
+
+---
+
+## 🌐 Access the App
+
+- **Sender**: http://localhost:5050  
+- **Receiver**: http://localhost:5050/receiver.html
+
+To test across devices on the same local network, replace `localhost` with your machine’s local IP:
+
+```
+http://<your-local-ip>:5050
+http://<your-local-ip>:5050/receiver.html
+```
+
+---
+
+## 📖 Usage Instructions
+
+### 📨 Sender
+
+1. Go to `http://localhost:5050`  
+2. Click **Send Files**  
+3. Share the generated **Room Code** or **QR Code**  
+4. Wait for the receiver to join  
+5. Select and send a file
+
+### 📥 Receiver
+
+1. Go to `http://localhost:5050/receiver.html`  
+2. Connect using:  
+   - **Room Code**, or  
+   - **QR Scan** (allow camera access)  
+3. Choose where to save the file if prompted  
+4. File will auto-download when transfer completes
+
+> If File System Access API isn’t supported, file is downloaded via memory buffer (may fail for large files)
+
+---
+
+## 🔧 Configuration
+
+- **Port**: Set in `.env`  
+- **Server Constants**: Modify `server.js`  
+  - `MAX_CHUNK_BUFFER_SIZE`  
+  - `PING_TIMEOUT_DEFAULT`  
+  - `TRANSFER_INACTIVITY_TIMEOUT`  
+- **Client File Size Limit**: Set in `main.js`
+
+---
+
+## 🙋 FAQ
+
+### ❓ Does this use true P2P (WebRTC)?
+
+No. It currently uses Socket.IO as a relay. WebRTC may be integrated in future versions.
+
+### ❓ Why do large transfers fail?
+
+If the File System Access API is unsupported, the file is buffered in memory, which can exceed browser limits.
+
+### ❓ Why doesn't QR scanning work via local IP?
+
+QR scanning requires camera access, which is only allowed in secure contexts (HTTPS or localhost). Workarounds include setting up HTTPS or using `localhost`.
+
+### ❓ Can I send multiple files?
+
+Not yet. Only one file per session is currently supported.
+
+### ❓ Is the transfer encrypted?
+
+Not by default. To encrypt the connection, serve over **HTTPS**. WebRTC (when implemented) uses **DTLS encryption**.
+
+---
+
+## 📜 License
+
+MIT License
+
+Copyright (c) 2025 [Aniket Mani]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
